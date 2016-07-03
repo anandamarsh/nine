@@ -73,6 +73,7 @@ describe('Nine Test Suite', function() {
         it('should return status code 400 and an error message if the request body doesnt have the payload', function (done) {
             request(url).post("").send({}).expect('Content-Type', /json/).end(function (err, res) {
                 if (err) throw err;
+                console.log("RES: "+JSON.stringify(res));
                 res.should.have.status(400);
                 res.body.error.should.equal("Could not decode request: JSON parsing failed");
                 done();
