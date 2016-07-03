@@ -9,8 +9,9 @@ router.get('/', function(req, res, next) {
 
 /* filter the passed JSON */
 router.post('/', function(req, res, next) {
-    console.log("REQ: "+JSON.stringify(req.headers));
+    console.log("\n\nREQ: "+JSON.stringify(req.headers));
     filter.doFilter(req, function(result){
+        console.log("doFilter() called with "+JSON.stringify(result));
         if(!result) {
             res.writeHead(400, {'Content-Type': 'application/json'});
             res.write(JSON.stringify({"error": "Could not decode request: JSON parsing failed"}));
