@@ -8,7 +8,7 @@ router.get('/', function(req, res, next) {
 });
 
 /* filter the passed JSON */
-router.post('/unfiltered', function(req, res, next) {
+router.post('/', function(req, res, next) {
     filter.doFilter(req, function(result){
         if(!result)
             res.status(400).json({ "error": "Could not decode request: JSON parsing failed" });
