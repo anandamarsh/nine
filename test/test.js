@@ -40,7 +40,7 @@ describe('Nine Test Suite', function() {
             });
         });
         it('should return status code 400 for a hit to an valid api endpoint with blank request', function(done) {
-            request(url).post("").end(function(err, res) {
+            request(url).post("").expect('Content-Type', /json/).end(function(err, res) {
                 if (err) throw err;
                 res.should.have.status(400);
                 done();
@@ -55,7 +55,7 @@ describe('Nine Test Suite', function() {
     describe('Responses : Negative cases', function() {
 
         it('should return status code 400 and an error message if the request body is empty', function (done) {
-            request(url).post("").end(function (err, res) {
+            request(url).post("").expect('Content-Type', /json/).end(function (err, res) {
                 if (err) throw err;
                 res.should.have.status(400);
                 res.body.error.should.equal("Could not decode request: JSON parsing failed");
@@ -63,7 +63,7 @@ describe('Nine Test Suite', function() {
             });
         });
         it('should return status code 400 and an error message if the request body is not a JSON', function (done) {
-            request(url).post("").send("some_string").end(function (err, res) {
+            request(url).post("").send("some_string").expect('Content-Type', /json/).end(function (err, res) {
                 if (err) throw err;
                 res.should.have.status(400);
                 res.body.error.should.equal("Could not decode request: JSON parsing failed");
@@ -71,7 +71,7 @@ describe('Nine Test Suite', function() {
             });
         });
         it('should return status code 400 and an error message if the request body doesnt have the payload', function (done) {
-            request(url).post("").send({}).end(function (err, res) {
+            request(url).post("").send({}).expect('Content-Type', /json/).end(function (err, res) {
                 if (err) throw err;
                 res.should.have.status(400);
                 res.body.error.should.equal("Could not decode request: JSON parsing failed");

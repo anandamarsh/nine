@@ -10,10 +10,13 @@ router.get('/', function(req, res, next) {
 /* filter the passed JSON */
 router.post('/', function(req, res, next) {
     filter.doFilter(req, function(result){
-        if(!result)
-            res.status(400).json({ "error": "Could not decode request: JSON parsing failed" });
-        else
-            res.status(200).json({"response": result});
+        if(!result) {
+            res.writeHead(400, {'Content-Type': 'application/json'});
+            res.end(JSON.stringify({"error": "Could not decode request: JSON parsing failed"}));
+        } else {
+            res.writeHead(200, {'Content-Type': 'application/json'});
+            res.end(JSON.stringify({"response": result}));
+        }
     });
 });
 
