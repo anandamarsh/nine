@@ -10,7 +10,7 @@ var fs = require('fs');
 
 describe('Nine Test Suite', function() {
 
-    var url = 'https://ninemi.herokuapp.com/';
+    var url = 'https://ninemi.herokuapp.com';
 
     var minimalValidJSON;
     beforeEach(function(done) {
@@ -35,6 +35,13 @@ describe('Nine Test Suite', function() {
             request(url).post('/invalidendpoint').end(function(err, res) {
                 if (err) throw err;
                 res.should.have.status(404);
+                done();
+            });
+        });
+        it('should return status code 400 for a hit to an valid api endpoint with blank request', function(done) {
+            request(url).post('/unfiltered').end(function(err, res) {
+                if (err) throw err;
+                res.should.have.status(400);
                 done();
             });
         });
