@@ -9,6 +9,7 @@ router.get('/', function(req, res, next) {
 
 /* filter the passed JSON */
 router.post('/', function(req, res, next) {
+    console.log("REQ: "+JSON.stringify(req.headers));
     filter.doFilter(req, function(result){
         if(!result) {
             res.writeHead(400, {'Content-Type': 'application/json'});
