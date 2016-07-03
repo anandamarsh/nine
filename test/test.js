@@ -10,8 +10,8 @@ var fs = require('fs');
 
 describe('Nine Test Suite', function() {
 
-    //var url = 'https://ninemi.herokuapp.com';
-    var url = 'http://localhost:3000';
+    var url = 'https://ninemi.herokuapp.com';
+    //var url = 'http://localhost:3000';
 
     var minimalValidJSON;
     beforeEach(function(done) {
